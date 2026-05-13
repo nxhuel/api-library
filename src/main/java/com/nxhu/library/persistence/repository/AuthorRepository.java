@@ -1,11 +1,9 @@
 package com.nxhu.library.persistence.repository;
 
+import com.nxhu.library.persistence.entity.AuthorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.nxhu.library.persistence.entity.AuthorEntity;
-
 @Repository
-public interface IAuthorRepository extends JpaRepository<AuthorEntity, Long> {
-
+public interface AuthorRepository extends JpaRepository<AuthorEntity, Long> {
 }
