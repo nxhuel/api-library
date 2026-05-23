@@ -25,4 +25,6 @@ public class UserRequestDTO {
 
     @NotNull
     private Role role;
+
+    private String photo;
 }

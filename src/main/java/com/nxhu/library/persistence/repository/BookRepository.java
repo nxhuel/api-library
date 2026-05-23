@@ -12,4 +12,8 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
     List<BookEntity> findByAuthorUserId(Long authorId);
 
     List<BookEntity> findByUploadedById(Long userId);
+
+    long countByAuthorUserId(Long authorId);
+
+    long countByDeletedFalse();
 }

@@ -2,6 +2,7 @@ package com.nxhu.library.controller;
 
 import com.nxhu.library.dto.request.AuthorRequestDTO;
 import com.nxhu.library.dto.response.AuthorResponseDTO;
+import com.nxhu.library.dto.response.AuthorStatsResponseDTO;
 import com.nxhu.library.service.AuthorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +49,11 @@ public class AuthorController {
     public ResponseEntity<Void> deleteAuthor(@PathVariable Long userId) {
         authorService.deleteAuthor(userId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{authorId}/stats")
+    public ResponseEntity<AuthorStatsResponseDTO> getAuthorStats(@PathVariable Long authorId) {
+        AuthorStatsResponseDTO response = authorService.getAuthorStats(authorId);
+        return ResponseEntity.ok(response);
     }
 }

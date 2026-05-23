@@ -1,6 +1,7 @@
 package com.nxhu.library.persistence.entity;
 
 import com.nxhu.library.persistence.entity.enums.Role;
+import com.nxhu.library.persistence.entity.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,6 +36,12 @@ public class UserEntity {
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    private String photo;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private UserStatus status = UserStatus.ACTIVE;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private AuthorEntity author;

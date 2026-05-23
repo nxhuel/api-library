@@ -20,6 +20,8 @@ public class BookRequestDTO {
 
     private Integer numPages;
 
+    private String coverImage;
+
     @NotNull
     private Long authorId;
 

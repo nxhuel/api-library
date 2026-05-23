@@ -26,6 +26,10 @@ public class AuthorEntity {
 
     private String bio;
 
+    @Column(name = "star_counts")
+    @Builder.Default
+    private Integer starCounts = 0;
+
     @OneToMany(mappedBy = "author")
     private List<BookEntity> books;
 }

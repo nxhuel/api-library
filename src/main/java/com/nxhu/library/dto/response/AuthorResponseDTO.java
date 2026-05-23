@@ -14,4 +14,5 @@ public class AuthorResponseDTO {
     private String userEmail;
     private String nationality;
     private String bio;
+    private Integer starCounts;
 }

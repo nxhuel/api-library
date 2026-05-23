@@ -26,6 +26,21 @@ public class BookEntity {
     @Column(name = "num_pages")
     private Integer numPages;
 
+    @Column(name = "cover_image")
+    private String coverImage;
+
+    @Column(name = "pdf_path")
+    private String pdfPath;
+
+    @Column(name = "downloads_count")
+    @Builder.Default
+    private Integer downloadsCount = 0;
+
+    private Double rating;
+
+    @Builder.Default
+    private Boolean deleted = false;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
     private AuthorEntity author;

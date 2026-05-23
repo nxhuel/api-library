@@ -14,6 +14,10 @@ public class BookResponseDTO {
     private String description;
     private String gender;
     private Integer numPages;
+    private String coverImage;
+    private String pdfPath;
+    private Integer downloadsCount;
+    private Double rating;
     private Long authorId;
     private String authorName;
     private Long uploadedById;

@@ -1,7 +1,10 @@
 package com.nxhu.library.controller;
 
 import com.nxhu.library.dto.request.UserRequestDTO;
+import com.nxhu.library.dto.request.UserRoleRequestDTO;
+import com.nxhu.library.dto.request.UserStatusRequestDTO;
 import com.nxhu.library.dto.response.UserResponseDTO;
+import com.nxhu.library.persistence.entity.enums.Role;
 import com.nxhu.library.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,10 +39,30 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/role/{role}")
+    public ResponseEntity<List<UserResponseDTO>> getUsersByRole(@PathVariable Role role) {
+        List<UserResponseDTO> response = userService.getUsersByRole(role);
+        return ResponseEntity.ok(response);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id,
                                                        @Valid @RequestBody UserRequestDTO request) {
         UserResponseDTO response = userService.updateUser(id, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<UserResponseDTO> updateUserStatus(@PathVariable Long id,
+                                                             @Valid @RequestBody UserStatusRequestDTO request) {
+        UserResponseDTO response = userService.updateUserStatus(id, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/{id}/role")
+    public ResponseEntity<UserResponseDTO> updateUserRole(@PathVariable Long id,
+                                                           @Valid @RequestBody UserRoleRequestDTO request) {
+        UserResponseDTO response = userService.updateUserRole(id, request);
         return ResponseEntity.ok(response);
     }
 

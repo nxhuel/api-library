@@ -2,12 +2,17 @@ package com.nxhu.library.controller;
 
 import com.nxhu.library.dto.request.BookRequestDTO;
 import com.nxhu.library.dto.response.BookResponseDTO;
+import com.nxhu.library.dto.response.DeletedBookResponseDTO;
 import com.nxhu.library.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -59,5 +64,28 @@ public class BookController {
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/{id}/pdf", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<BookResponseDTO> uploadPdf(@PathVariable Long id,
+                                                      @RequestParam("file") MultipartFile file) {
+        BookResponseDTO response = bookService.uploadPdf(id, file);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}/pdf")
+    public ResponseEntity<Resource> downloadPdf(@PathVariable Long id) {
+        Resource resource = bookService.getPdfResource(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_PDF)
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"book-%d.pdf\"".formatted(id))
+                .body(resource);
+    }
+
+    @GetMapping("/deleted")
+    public ResponseEntity<List<DeletedBookResponseDTO>> getDeletedBooks() {
+        List<DeletedBookResponseDTO> response = bookService.getDeletedBooks();
+        return ResponseEntity.ok(response);
     }
 }
